@@ -4,10 +4,9 @@
 
 %%
 [0-9][0-9]*	return INTEGER;
-\+		return ADD;
-[ \t\n]		return WHITESPACE;
-. 		printf("unexpected characted\n");
-
+[\+\-\*]		return OPERATOR;
+[ \t]		return;
+.|\n   		{return yytext[0];}
 %%
 
 int yywrap(void)

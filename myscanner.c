@@ -13,21 +13,35 @@ int main(void)
 
   ntoken = yylex();
   while(ntoken) {
-     printf("%d\n", ntoken);
-     if(yylex() != WHITESPACE) {
-	printf("Syntax error in line %d, Expected a space but found %s\n", yylineno, yytext);
-	return 1;
-     }
-     vtoken = yylex();
-     switch(ntoken) {
-     case INTEGER:
-     case ADD:
-     break;
-     default:
-     break;
-     }
+    printf("%d\n", ntoken);
+    if(ntoken != OPERATOR) {
+	    printf("Syntax error in line %d, Expected a OPERATOR but found %s\n", yylineno, yytext);
+	    return 1;
+    }
+    ntoken = yylex();
+  
+    if(ntoken != WHITESPACE) {
+      printf("Syntax error in line %d, expected white space but found %s\n", yylineno, yytext);
+    }
       
-     ntoken = yylex(); 
+    ntoken = yylex(); 
+
+    if(ntoken != INTEGER) {
+      printf("Syntax error in line %d, expected integer but found %s\n", yylineno, yytext);
+    }
+
+    ntoken = yylex(); 
+
+    if(ntoken != WHITESPACE) {
+      printf("Syntax error in line %d, expected white space but found %s\n", yylineno, yytext);
+    }
+
+    ntoken = yylex(); 
+
+    if(ntoken != INTEGER) {
+      printf("Syntax error in line %d, expected integer but found %s\n", yylineno, yytext);
+    }
+    
   }
   return 0;
 }
